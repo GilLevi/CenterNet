@@ -28,7 +28,7 @@ class MultiPoseDetector(BaseDetector):
 
   def process(self, images, return_time=False):
     with torch.no_grad():
-      torch.cuda.synchronize()
+      #torch.cuda.synchronize()
       output = self.model(images)[-1]
       output['hm'] = output['hm'].sigmoid_()
       if self.opt.hm_hp and not self.opt.mse_loss:
@@ -37,7 +37,7 @@ class MultiPoseDetector(BaseDetector):
       reg = output['reg'] if self.opt.reg_offset else None
       hm_hp = output['hm_hp'] if self.opt.hm_hp else None
       hp_offset = output['hp_offset'] if self.opt.reg_hp_offset else None
-      torch.cuda.synchronize()
+      #torch.cuda.synchronize()
       forward_time = time.time()
       
       if self.opt.flip_test:

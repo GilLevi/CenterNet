@@ -9,18 +9,20 @@ defines = []
 with_cuda = False
 
 extra_objects = []
-if torch.cuda.is_available():
-    print('Including CUDA code.')
-    sources += ['src/dcn_v2_cuda.c']
-    headers += ['src/dcn_v2_cuda.h']
-    defines += [('WITH_CUDA', None)]
-    extra_objects += ['src/cuda/dcn_v2_im2col_cuda.cu.o']
-    extra_objects += ['src/cuda/dcn_v2_psroi_pooling_cuda.cu.o']
-    with_cuda = True
-else:
-    raise ValueError('CUDA is not available')
 
-extra_compile_args = ['-fopenmp', '-std=c99']
+#if torch.cuda.is_available():
+#    print('Including CUDA code.')
+#    sources += ['src/dcn_v2_cuda.c']
+#    headers += ['src/dcn_v2_cuda.h']
+#    defines += [('WITH_CUDA', None)]
+#    extra_objects += ['src/cuda/dcn_v2_im2col_cuda.cu.o']
+#    extra_objects += ['src/cuda/dcn_v2_psroi_pooling_cuda.cu.o']
+#    with_cuda = True
+#else:
+#    raise ValueError('CUDA is not available')
+
+#extra_compile_args = ['-fopenmp', '-std=c99']
+extra_compile_args = ['-Xpreprocesssor -fopenmp', '-std=c99']
 
 this_file = os.path.dirname(os.path.realpath(__file__))
 print(this_file)
