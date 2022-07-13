@@ -20,8 +20,17 @@ class SurgAI(data.Dataset):
 
   def __init__(self, opt, split):
     super(SurgAI, self).__init__()
-    self.data_dir = os.path.join(opt.data_dir, 'coco')
-    self.img_dir = os.path.join(self.data_dir, '{}2017'.format(split))
+    # Gil: this is root data dir, I kept the original coco dir commented out as documentation
+    self.data_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet'
+    # self.data_dir = os.path.join(opt.data_dir, 'coco')
+    if split == 'train':
+      self.img_dir = os.path.join(self.data_dir, 'train_vid3')
+      self.annot_path = os.path.join(self.data_dir, 'annotations')
+    elif split == 'val':
+      self.img_dir = os.path.join(self.data_dir, 'val_vid4')
+    elif split == 'test':
+      self.img_dir = os.path.join(self.data_dir, 'test_vid1')
+
     if split == 'test':
       self.annot_path = os.path.join(
           self.data_dir, 'annotations', 
@@ -70,8 +79,6 @@ class SurgAI(data.Dataset):
         [-0.5832747, 0.00994535, -0.81221408],
         [-0.56089297, 0.71832671, 0.41158938]
     ], dtype=np.float32)
-    # self.mean = np.array([0.485, 0.456, 0.406], np.float32).reshape(1, 1, 3)
-    # self.std = np.array([0.229, 0.224, 0.225], np.float32).reshape(1, 1, 3)
 
     self.split = split
     self.opt = opt
