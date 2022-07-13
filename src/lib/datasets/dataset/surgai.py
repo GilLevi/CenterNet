@@ -5,20 +5,21 @@ import pycocotools.coco as coco
 import numpy as np
 import json
 import os
-
 import torch.utils.data as data
+
 
 class SurgAI(data.Dataset):
   num_classes = 2
   default_resolution = [1920, 1080]
   # TODO: compute mean and std
-  mean = np.array([0.40789654, 0.44719302, 0.47026115],
+
+  mean = np.array([0.36078363, 0.2696714 , 0.34761672],
                    dtype=np.float32).reshape(1, 1, 3)
-  std  = np.array([0.28863828, 0.27408164, 0.27809835],
+  std  = np.array([0.01912308, 0.01850544, 0.0194903],
                    dtype=np.float32).reshape(1, 1, 3)
 
   def __init__(self, opt, split):
-    super(COCO, self).__init__()
+    super(SurgAI, self).__init__()
     self.data_dir = os.path.join(opt.data_dir, 'coco')
     self.img_dir = os.path.join(self.data_dir, '{}2017'.format(split))
     if split == 'test':
