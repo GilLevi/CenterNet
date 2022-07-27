@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
@@ -10,10 +9,10 @@ class opts(object):
   def __init__(self):
     self.parser = argparse.ArgumentParser()
     # basic experiment setting
-    self.parser.add_argument('task', default='ctdet',
+    self.parser.add_argument('--task', default='ctdet',
                              help='ctdet | ddd | multi_pose | exdet')
     self.parser.add_argument('--dataset', default='coco',
-                             help='coco | kitti | coco_hp | pascal')
+                             help='coco | kitti | coco_hp | pascal | surgai')
     self.parser.add_argument('--exp_id', default='default')
     self.parser.add_argument('--test', action='store_true')
     self.parser.add_argument('--debug', type=int, default=0,
@@ -321,11 +320,14 @@ class opts(object):
     elif opt.task == 'multi_pose':
       # assert opt.dataset in ['coco_hp']
       opt.flip_idx = dataset.flip_idx
-      opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 34}
+      #opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 34}
+      # Gil: changed from 34 to 6
+      opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 6}
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
       if opt.hm_hp:
-        opt.heads.update({'hm_hp': 17})
+        # opt.heads.update({'hm_hp': 17})
+        opt.heads.update({'hm_hp': 3})
       if opt.reg_hp_offset:
         opt.heads.update({'hp_offset': 2})
     else:

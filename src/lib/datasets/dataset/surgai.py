@@ -7,16 +7,23 @@ import json
 import os
 import torch.utils.data as data
 
+USE_TINY = True
+if USE_TINY:
+  gt_dir = 'annotations_tiny'
+else:
+  gt_dir = 'annotations'
 
 class SurgAI(data.Dataset):
   num_classes = 2
   default_resolution = [1920, 1080]
-  # TODO: compute mean and std
 
   mean = np.array([0.36078363, 0.2696714 , 0.34761672],
                    dtype=np.float32).reshape(1, 1, 3)
   std = np.array([0.01912308, 0.01850544, 0.0194903],
                    dtype=np.float32).reshape(1, 1, 3)
+  # TODO: might need to set some value here
+  flip_idx = []
+  num_joints = 3 #TODO: hope it works
 
   def __init__(self, opt, split):
     super(SurgAI, self).__init__()
@@ -25,13 +32,13 @@ class SurgAI(data.Dataset):
     # self.data_dir = os.path.join(opt.data_dir, 'coco')
     if split == 'train':
       self.img_dir = os.path.join(self.data_dir, 'train_vid3')
-      self.annot_path = os.path.join(self.data_dir, 'annotations', 'train_vid3.json')
+      self.annot_path = os.path.join(self.data_dir, gt_dir, 'train_vid3.json')
     elif split == 'val':
       self.img_dir = os.path.join(self.data_dir, 'val_vid4')
-      self.annot_path = os.path.join(self.data_dir, 'annotations', 'val_vid4.json')
+      self.annot_path = os.path.join(self.data_dir, gt_dir, 'val_vid4.json')
     elif split == 'test':
       self.img_dir = os.path.join(self.data_dir, 'test_vid1')
-      self.annot_path = os.path.join(self.data_dir, 'annotations', 'test_vid1.json')
+      self.annot_path = os.path.join(self.data_dir, gt_dir, 'test_vid1.json')
 
     self.max_objs = 2
     self.class_name = ['__background__', 'L', 'R']

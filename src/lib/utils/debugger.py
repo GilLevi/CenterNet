@@ -24,9 +24,10 @@ class Debugger(object):
     self.dim_scale = 1
     if dataset == 'coco_hp':
       self.names = ['p']
-      self.num_class = 1
-      self.num_joints = 17
-      self.edges = [[0, 1], [0, 2], [1, 3], [2, 4], 
+      self.num_class = 2
+      #self.num_joints = 17
+      self.num_joints = 3
+      self.edges = [[0, 1], [0, 2], [1, 3], [2, 4],
                     [3, 5], [4, 6], [5, 6], 
                     [5, 7], [7, 9], [6, 8], [8, 10], 
                     [5, 11], [6, 12], [11, 12], 

@@ -5,7 +5,8 @@ from __future__ import print_function
 import _init_paths
 
 import os
-
+import sys
+sys.path.append('/Users/gillevi/Projects/SurgeonAI/cocoapi/PythonAPI')
 import torch
 import torch.utils.data
 from opts import opts
@@ -98,5 +99,7 @@ def main(opt):
   logger.close()
 
 if __name__ == '__main__':
-  opt = opts().parse()
+  opt = opts().parse(args=['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=res_18', '--head_conv=64',
+                           '--num_workers=0', '--batch_size=1'])
+
   main(opt)
