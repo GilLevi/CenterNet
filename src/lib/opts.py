@@ -108,6 +108,7 @@ class opts(object):
                              help='max number of output objects.') 
     self.parser.add_argument('--not_prefetch_test', action='store_true',
                              help='not use parallal data pre-processing.')
+
     self.parser.add_argument('--fix_res', action='store_true',
                              help='fix testing resolution or keep '
                                   'the original resolution')
@@ -116,7 +117,8 @@ class opts(object):
                                   ' during validation.')
 
     # dataset
-    self.parser.add_argument('--not_rand_crop', action='store_true',
+    # TODO: Gil: was store true originally, changed to false for debug
+    self.parser.add_argument('--not_rand_crop', action='store_false',
                              help='not use the random crop data augmentation'
                                   'from CornerNet.')
     self.parser.add_argument('--shift', type=float, default=0.1,
@@ -130,7 +132,8 @@ class opts(object):
                                   'apply rotation augmentation.')
     self.parser.add_argument('--flip', type = float, default=0.5,
                              help='probability of applying flip augmentation.')
-    self.parser.add_argument('--no_color_aug', action='store_true',
+    # TODO: Gil: was store true originally, changed to false for debug
+    self.parser.add_argument('--no_color_aug', action='store_false',
                              help='not use the color augmenation '
                                   'from CornerNet')
     # multi_pose
@@ -343,13 +346,19 @@ class opts(object):
       'exdet': {'default_resolution': [512, 512], 'num_classes': 80, 
                 'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
                 'dataset': 'coco'},
-      'multi_pose': {
-        'default_resolution': [512, 512], 'num_classes': 1, 
-        'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
-        'dataset': 'coco_hp', 'num_joints': 17,
-        'flip_idx': [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], 
-                     [11, 12], [13, 14], [15, 16]]},
-      'ddd': {'default_resolution': [384, 1280], 'num_classes': 3, 
+      # 'multi_pose': {
+      #   'default_resolution': [512, 512], 'num_classes': 1,
+      #   'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
+      #   'dataset': 'coco_hp', 'num_joints': 17,
+      #   'flip_idx': [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
+      #                [11, 12], [13, 14], [15, 16]]},
+        'multi_pose': {
+            'default_resolution': [1920, 1080], 'num_classes': 1,
+            'mean': [0.36078363, 0.2696714 , 0.34761672], 'std': [0.01912308, 0.01850544, 0.0194903],
+            'dataset': 'surgai', 'num_joints': 3,
+            'flip_idx': [] },
+
+        'ddd': {'default_resolution': [384, 1280], 'num_classes': 3,
                 'mean': [0.485, 0.456, 0.406], 'std': [0.229, 0.224, 0.225],
                 'dataset': 'kitti'},
     }

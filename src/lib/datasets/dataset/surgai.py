@@ -7,14 +7,16 @@ import json
 import os
 import torch.utils.data as data
 
-USE_TINY = True
-if USE_TINY:
+gt_type = 'debug'
+if gt_type == 'tiny':
   gt_dir = 'annotations_tiny'
+elif gt_type == 'debug':
+  gt_dir = 'annotations_debug'
 else:
   gt_dir = 'annotations'
 
 class SurgAI(data.Dataset):
-  num_classes = 2
+  num_classes = 1
   default_resolution = [1920, 1080]
 
   mean = np.array([0.36078363, 0.2696714 , 0.34761672],
@@ -32,23 +34,30 @@ class SurgAI(data.Dataset):
     # self.data_dir = os.path.join(opt.data_dir, 'coco')
     if split == 'train':
       self.img_dir = os.path.join(self.data_dir, 'train_vid3')
-      self.annot_path = os.path.join(self.data_dir, gt_dir, 'train_vid3.json')
+      self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
     elif split == 'val':
-      self.img_dir = os.path.join(self.data_dir, 'val_vid4')
-      self.annot_path = os.path.join(self.data_dir, gt_dir, 'val_vid4.json')
+      if gt_type == 'debug':
+        self.img_dir = os.path.join(self.data_dir, 'train_vid3')
+      else:
+        self.img_dir = os.path.join(self.data_dir, 'val_vid4')
+      self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
     elif split == 'test':
-      self.img_dir = os.path.join(self.data_dir, 'test_vid1')
-      self.annot_path = os.path.join(self.data_dir, gt_dir, 'test_vid1.json')
+      if gt_type == 'debug':
+        self.img_dir = os.path.join(self.data_dir, 'train_vid3')
+      else:
+        self.img_dir = os.path.join(self.data_dir, 'test_vid1')
+      self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
 
     self.max_objs = 2
-    self.class_name = ['__background__', 'L', 'R']
+    #self.class_name = ['__background__', 'L', 'R']
+    self.class_name = ['__background__', 'P']
     # TODO: I hope this corresponds to valid object categories
     self._valid_ids = [1, 2]
     self.cat_ids = {v: i for i, v in enumerate(self._valid_ids)}
     self.voc_color = [(v // 32 * 64 + 64, (v // 8) % 4 * 64, v % 8 * 32) \
                       for v in range(1, self.num_classes + 1)]
     self._data_rng = np.random.RandomState(123)
-    # TODO: I have no idea what this means and I didn't find usage of it
+    # TODO: I think this is used for color augmentations
     self._eig_val = np.array([0.2141788, 0.01817699, 0.00341571],
                              dtype=np.float32)
     self._eig_vec = np.array([

@@ -43,8 +43,8 @@ def main(opt):
 
   print('Setting up data...')
   val_loader = torch.utils.data.DataLoader(
-      Dataset(opt, 'val'), 
-      batch_size=1, 
+      Dataset(opt, 'val'),
+      batch_size=1,
       shuffle=False,
       num_workers=1,
       pin_memory=True
@@ -86,7 +86,9 @@ def main(opt):
         save_model(os.path.join(opt.save_dir, 'model_best.pth'), 
                    epoch, model)
     else:
-      save_model(os.path.join(opt.save_dir, 'model_last.pth'), 
+      save_model(os.path.join(opt.save_dir, 'model_{}.pth'.format(epoch)),
+                   epoch, model, optimizer)
+      save_model(os.path.join(opt.save_dir, 'model_last.pth'),
                  epoch, model, optimizer)
     logger.write('\n')
     if epoch in opt.lr_step:
@@ -100,6 +102,6 @@ def main(opt):
 
 if __name__ == '__main__':
   opt = opts().parse(args=['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=res_18', '--head_conv=64',
-                           '--num_workers=0', '--batch_size=1'])
+                           '--num_workers=0', '--batch_size=1', '--scale=0', '--shift=0', '--flip=0', '--val_intervals=10000'])
 
   main(opt)
