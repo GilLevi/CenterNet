@@ -67,6 +67,9 @@ class BaseTrainer(object):
         if k != 'meta':
           batch[k] = batch[k].to(device=opt.device, non_blocking=True)    
       output, loss, loss_stats = model_with_loss(batch)
+      import pickle
+      with open(f'/Users/gillevi/Projects/SurgeonAI/CenterNet/src/gil_debug/debug_output_{epoch}.pickle','wb+') as f:
+        pickle.dump(output, f)
       loss = loss.mean()
       print(f'iter:{iter_id}, loss:{loss}')
       if phase == 'train':

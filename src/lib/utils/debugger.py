@@ -45,7 +45,6 @@ class Debugger(object):
       self.names = ['p']
       self.num_class = 1
       self.num_joints = 17
-      # self.num_joints = 3
       self.edges = [[0, 1], [0, 2], [1, 3], [2, 4],
                     [3, 5], [4, 6], [5, 6],
                     [5, 7], [7, 9], [6, 8], [8, 10],

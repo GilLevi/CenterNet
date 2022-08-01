@@ -65,8 +65,8 @@ class MultiPoseDetector(BaseDetector):
       dets.copy(), [meta['c']], [meta['s']],
       meta['out_height'], meta['out_width'])
     for j in range(1, self.num_classes + 1):
-      #dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 39)
-      dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 6)
+      dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 39)
+      # dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 6)
       # import pdb; pdb.set_trace()
       dets[0][j][:, :4] /= scale
       dets[0][j][:, 5:] /= scale
@@ -82,6 +82,8 @@ class MultiPoseDetector(BaseDetector):
     return results
 
   def debug(self, debugger, images, dets, output, scale=1):
+    # TODO: Gil_surgai
+    # self.num_joints = 3
     dets = dets.detach().cpu().numpy().copy()
     dets[:, :, :4] *= self.opt.down_ratio
     dets[:, :, 5:39] *= self.opt.down_ratio
@@ -100,5 +102,5 @@ class MultiPoseDetector(BaseDetector):
     for bbox in results[1]:
       if bbox[4] > self.opt.vis_thresh:
         debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
-        # debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
+        debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
     debugger.show_all_imgs(pause=self.pause)
