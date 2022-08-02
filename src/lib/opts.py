@@ -323,14 +323,19 @@ class opts(object):
     elif opt.task == 'multi_pose':
       # assert opt.dataset in ['coco_hp']
       opt.flip_idx = dataset.flip_idx
-      opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 34}
-      # Gil: changed from 34 to 6
-      # opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 6}
+      # TODO: 4CENTER_NET
+      if opt.dataset == 'surgai':
+        opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 6}
+      else:
+        opt.heads = {'hm': opt.num_classes, 'wh': 2, 'hps': 34}
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
       if opt.hm_hp:
-        opt.heads.update({'hm_hp': 17})
-        # opt.heads.update({'hm_hp': 3})
+          # TODO: 4CENTER_NET
+        if opt.dataset == 'surgai':
+            opt.heads.update({'hm_hp': 3})
+        else:
+            opt.heads.update({'hm_hp': 17})
       if opt.reg_hp_offset:
         opt.heads.update({'hp_offset': 2})
     else:
@@ -346,17 +351,18 @@ class opts(object):
       'exdet': {'default_resolution': [512, 512], 'num_classes': 80, 
                 'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
                 'dataset': 'coco'},
-      'multi_pose': {
-        'default_resolution': [512, 512], 'num_classes': 1,
-        'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
-        'dataset': 'coco_hp', 'num_joints': 17,
-        'flip_idx': [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
-                     [11, 12], [13, 14], [15, 16]]},
-      #   'multi_pose': {
-      #       'default_resolution': [1920, 1080], 'num_classes': 1,
-      #       'mean': [0.36078363, 0.2696714 , 0.34761672], 'std': [0.01912308, 0.01850544, 0.0194903],
-      #       'dataset': 'surgai', 'num_joints': 3,
-      #       'flip_idx': [] },
+      # 'multi_pose': {
+      #   'default_resolution': [512, 512], 'num_classes': 1,
+      #   'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
+      #   'dataset': 'coco_hp', 'num_joints': 17,
+      #   'flip_idx': [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
+      #                [11, 12], [13, 14], [15, 16]]},
+      # TODO: 4CENTER_NET
+        'multi_pose': {
+            'default_resolution': [1920, 1080], 'num_classes': 1,
+            'mean': [0.36078363, 0.2696714 , 0.34761672], 'std': [0.01912308, 0.01850544, 0.0194903],
+            'dataset': 'surgai', 'num_joints': 3,
+            'flip_idx': [] },
 
         'ddd': {'default_resolution': [384, 1280], 'num_classes': 3,
                 'mean': [0.485, 0.456, 0.406], 'std': [0.229, 0.224, 0.225],
