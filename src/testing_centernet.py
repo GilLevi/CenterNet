@@ -11,20 +11,20 @@ from detectors.detector_factory import detector_factory
 # arch = 'hourglass'
 
 # Pose estimation setting
-# TASK = 'multi_pose'
-# MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/models/multi_pose_hg_1x.pth'
-# arch = 'hourglass'
+TASK = 'multi_pose'
+MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/models/multi_pose_hg_1x.pth'
+arch = 'hourglass'
 
 # # Pose estimation on our data setting:
 # TODO: 4CENTER_NET
-TASK = 'multi_pose'
-MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_10.pth'
-arch = 'res_18'
+# TASK = 'multi_pose'
+# MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_10.pth'
+# arch = 'res_18'
 
 
-# opt = opts().init('--task {} --load_model {} --arch {} --gpus -1 --debug 2'.format(TASK, MODEL_PATH, arch).split(' '))
+opt = opts().init('--task {} --load_model {} --arch {} --gpus -1 --debug 2'.format(TASK, MODEL_PATH, arch).split(' '))
 # TODO: 4CENTER_NET
-opt = opts().init(['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=res_18', '--head_conv=64', '--num_workers=0', '--batch_size=1', '--debug=2','--load_model={}'.format(MODEL_PATH)])
+# opt = opts().init(['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=res_18', '--head_conv=64', '--num_workers=0', '--batch_size=1', '--debug=2','--load_model={}'.format(MODEL_PATH)])
 
 # opt.heads = {'hm': 1, 'wh': 2, 'hps': 6, 'reg': 2, 'hm_hp': 3, 'hp_offset': 2}
 Detector = detector_factory[opt.task]

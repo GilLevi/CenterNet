@@ -100,8 +100,9 @@ def main(opt):
           param_group['lr'] = lr
   logger.close()
 
+#arch=res_18, head_conv=64
 if __name__ == '__main__':
-  opt = opts().parse(args=['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=res_18', '--head_conv=64',
+  opt = opts().parse(args=['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=hourglass', '--head_conv=-1',
                            '--num_workers=0', '--batch_size=1', '--scale=0', '--shift=0', '--flip=0', '--val_intervals=10000'])
 
   main(opt)
