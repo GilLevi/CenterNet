@@ -1,5 +1,3 @@
-## TEST
-
 # Objects as Points
 Object detection, 3D detection, and pose estimation using center point detection:
 ![](readme/fig2.png)
