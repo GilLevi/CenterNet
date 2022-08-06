@@ -19,7 +19,7 @@ from detectors.detector_factory import detector_factory
 # TODO: 4CENTER_NET
 TASK = 'multi_pose'
 MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default_bu/model_40.pth'
-# MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_4.pth'
+# MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default_hourglass/model_4.pth'
 arch = 'res_18'
 # arch = 'hourglass'
 
