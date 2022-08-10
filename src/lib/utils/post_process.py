@@ -100,6 +100,7 @@ def ctdet_post_process(dets, c, s, h, w, num_classes):
   return ret
 
 
+#TODO: GIL why the values come out weird here?
 def multi_pose_post_process(dets, c, s, h, w):
   # dets: batch x max_dets x 40
   # return list of 39 in image coord

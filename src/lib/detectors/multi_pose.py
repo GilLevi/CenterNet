@@ -67,7 +67,6 @@ class MultiPoseDetector(BaseDetector):
     for j in range(1, self.num_classes + 1):
       # TODO: 4CENTER_NET
       # dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 39)
-      #TODO: change this to 11 !!!!!!
       dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 11)
       # import pdb; pdb.set_trace()
       dets[0][j][:, :4] /= scale
@@ -84,8 +83,6 @@ class MultiPoseDetector(BaseDetector):
     return results
 
   def debug(self, debugger, images, dets, output, scale=1):
-    # TODO: 4CENTER_NET
-    self.num_joints = 3
     dets = dets.detach().cpu().numpy().copy()
     dets[:, :, :4] *= self.opt.down_ratio
     dets[:, :, 5:39] *= self.opt.down_ratio
@@ -106,6 +103,6 @@ class MultiPoseDetector(BaseDetector):
       if bbox[4] > 0:
           debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
         # TODO: 4CENTER_NET
-        #debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
-          debugger.add_coco_hp(bbox[5:11], img_id='multi_pose')
+        #   debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
+          # debugger.add_coco_hp(bbox[5:11], img_id='multi_pose')
     debugger.show_all_imgs(pause=self.pause)
