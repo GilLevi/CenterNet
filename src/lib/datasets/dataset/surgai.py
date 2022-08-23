@@ -11,13 +11,14 @@ gt_type = 'debug'
 if gt_type == 'tiny':
   gt_dir = 'annotations_tiny'
 elif gt_type == 'debug':
-  gt_dir = 'annotations_debug'
+  gt_dir = 'annotations_debug_2' # annotations_debug_2
 else:
   gt_dir = 'annotations'
 
 class SurgAI(data.Dataset):
   num_classes = 1
-  default_resolution = [1920, 1080]
+  #default_resolution = [1920, 1080]
+  default_resolution = [512, 512]
 
   mean = np.array([0.36078363, 0.2696714 , 0.34761672],
                    dtype=np.float32).reshape(1, 1, 3)
@@ -34,6 +35,7 @@ class SurgAI(data.Dataset):
     # self.data_dir = os.path.join(opt.data_dir, 'coco')
     if split == 'train':
       self.img_dir = os.path.join(self.data_dir, 'train_vid3')
+      self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_debug_resized/3/Frames'
       self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
     elif split == 'val':
       if gt_type == 'debug':

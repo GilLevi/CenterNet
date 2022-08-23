@@ -358,8 +358,8 @@ class opts(object):
       #   'flip_idx': [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
       #                [11, 12], [13, 14], [15, 16]]},
       # TODO: 4CENTER_NET
-        'multi_pose': {
-            'default_resolution': [1920, 1080], 'num_classes': 1,
+        'multi_pose': {# [1920, 1080],
+            'default_resolution': [512, 512], 'num_classes': 1,
             'mean': [0.36078363, 0.2696714 , 0.34761672], 'std': [0.01912308, 0.01850544, 0.0194903],
             'dataset': 'surgai', 'num_joints': 3,
             'flip_idx': [] },

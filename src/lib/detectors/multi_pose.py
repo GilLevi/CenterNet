@@ -49,7 +49,6 @@ class MultiPoseDetector(BaseDetector):
                 if hm_hp is not None else None
         reg = reg[0:1] if reg is not None else None
         hp_offset = hp_offset[0:1] if hp_offset is not None else None
-      
       dets = multi_pose_decode(
         output['hm'], output['wh'], output['hps'],
         reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K)
@@ -100,9 +99,9 @@ class MultiPoseDetector(BaseDetector):
     debugger.add_img(image, img_id='multi_pose')
     for bbox in results[1]:
       # if bbox[4] > self.opt.vis_thresh:
-      if bbox[4] > 0:
-          debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
+      if bbox[4] > 0.2:
+          # debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
         # TODO: 4CENTER_NET
         #   debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
-          # debugger.add_coco_hp(bbox[5:11], img_id='multi_pose')
+          debugger.add_coco_hp(bbox[5:11], img_id='multi_pose')
     debugger.show_all_imgs(pause=self.pause)

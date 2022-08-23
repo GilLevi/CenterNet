@@ -37,7 +37,7 @@ class BaseDetector(object):
   def pre_process(self, image, scale, meta=None):
     height, width = image.shape[0:2]
     new_height = int(height * scale)
-    new_width  = int(width * scale)
+    new_width = int(width * scale)
     if self.opt.fix_res:
       inp_height, inp_width = self.opt.input_h, self.opt.input_w
       c = np.array([new_width / 2., new_height / 2.], dtype=np.float32)

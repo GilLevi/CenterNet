@@ -213,6 +213,7 @@ class Debugger(object):
   def add_coco_hp(self, points, img_id='default'): 
     points = np.array(points, dtype=np.int32).reshape(self.num_joints, 2)
     for j in range(self.num_joints):
+      # cv circle gets x,y pairs
       cv2.circle(self.imgs[img_id],
                  (points[j, 0], points[j, 1]), 3, self.colors_hp[j], -1)
     for j, e in enumerate(self.edges):
