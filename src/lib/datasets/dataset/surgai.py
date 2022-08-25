@@ -36,8 +36,11 @@ class SurgAI(data.Dataset):
     if split == 'train':
       # self.img_dir = os.path.join(self.data_dir, 'train_vid3')
       # self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
-        self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/3/Frames'
-        self.annot_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet/annotations_resized_tiny/train_vid3.json'
+      #   self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/3/Frames'
+      #   self.annot_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet/annotations_resized_tiny/train_vid3.json'
+        self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_debug_1500/3/Frames'
+        self.annot_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet/annotations_debug_1500/train_vid3.json'
+
     elif split == 'val':
       if gt_type == 'debug':
         self.img_dir = os.path.join(self.data_dir, 'train_vid3')

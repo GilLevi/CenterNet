@@ -18,14 +18,14 @@ from detectors.detector_factory import detector_factory
 # # Pose estimation on our data setting:
 # TODO: 4CENTER_NET
 TASK = 'multi_pose'
-MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_50.pth'
+MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_99.pth'
 # MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default_hourglass/model_4.pth'
 arch = 'res_18'
 # arch = 'hourglass'
 
 # opt = opts().init('--task {} --load_model {} --arch {} --gpus -1 --debug 2'.format(TASK, MODEL_PATH, arch).split(' '))
 # TODO: 4CENTER_NET
-opt = opts().init(['--task=multi_pose', '--dataset=surgai', '--gpu=-1', f'--arch={arch}', '--head_conv=-1', '--num_workers=0', '--batch_size=1', '--debug=2','--load_model={}'.format(MODEL_PATH)])
+opt = opts().init(['--task=multi_pose', '--dataset=surgai', '--gpu=-1', f'--arch={arch}', '--head_conv=-1', '--num_workers=0', '--batch_size=1', '--debug=0','--load_model={}'.format(MODEL_PATH)])
 
 # opt.heads = {'hm': 1, 'wh': 2, 'hps': 6, 'reg': 2, 'hm_hp': 3, 'hp_offset': 2}
 Detector = detector_factory[opt.task]
@@ -33,6 +33,6 @@ detector = Detector(opt)
 
 # img_path = '/Users/gillevi/Downloads/yoav_wedding.jpeg'
 #img_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images/3/Frames/frame0067.png'
-img_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/4/Frames/frame0117.png'
+img_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_debug_1500/3/Frames/frame0067.png'
 ret = detector.run(img_path)['results']
 print(ret)
