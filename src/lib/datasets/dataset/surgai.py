@@ -11,7 +11,7 @@ gt_type = 'debug'
 if gt_type == 'tiny':
   gt_dir = 'annotations_tiny'
 elif gt_type == 'debug':
-  gt_dir = 'annotations_debug_2' # annotations_debug_2
+  gt_dir = 'annotations_debug'
 else:
   gt_dir = 'annotations'
 
@@ -34,22 +34,26 @@ class SurgAI(data.Dataset):
     self.data_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet'
     # self.data_dir = os.path.join(opt.data_dir, 'coco')
     if split == 'train':
-      self.img_dir = os.path.join(self.data_dir, 'train_vid3')
-      self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_debug_resized/3/Frames'
-      self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
+      # self.img_dir = os.path.join(self.data_dir, 'train_vid3')
+      # self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
+        self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/3/Frames'
+        self.annot_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet/annotations_resized_tiny/train_vid3.json'
     elif split == 'val':
       if gt_type == 'debug':
         self.img_dir = os.path.join(self.data_dir, 'train_vid3')
       else:
         self.img_dir = os.path.join(self.data_dir, 'val_vid4')
-      self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
+      # self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
+      self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/4/Frames'
+      self.annot_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet/annotations_resized_tiny/val_vid4.json'
     elif split == 'test':
       if gt_type == 'debug':
         self.img_dir = os.path.join(self.data_dir, 'train_vid3')
       else:
         self.img_dir = os.path.join(self.data_dir, 'test_vid1')
-      self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
-
+      # self.annot_path = os.path.join(self.data_dir, gt_dir, 'vid3.json')
+      self.img_dir = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/1/Frames'
+      self.annot_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/for_centernet/annotations_resized_tiny/test_vid1.json'
     self.max_objs = 2
     #self.class_name = ['__background__', 'L', 'R']
     self.class_name = ['__background__', 'P']

@@ -71,7 +71,7 @@ class BaseTrainer(object):
       with open(f'/Users/gillevi/Projects/SurgeonAI/CenterNet/src/gil_debug_correct_res/debug_output_{epoch}.pickle','wb+') as f:
         pickle.dump(output, f)
       loss = loss.mean()
-      print(f'iter:{iter_id}, loss:{loss}')
+      # print(f'iter:{iter_id}, loss:{loss}')
       if phase == 'train':
         self.optimizer.zero_grad()
         loss.backward()

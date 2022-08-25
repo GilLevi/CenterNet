@@ -18,7 +18,7 @@ from detectors.detector_factory import detector_factory
 # # Pose estimation on our data setting:
 # TODO: 4CENTER_NET
 TASK = 'multi_pose'
-MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_99.pth'
+MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default/model_50.pth'
 # MODEL_PATH = '/Users/gillevi/Projects/SurgeonAI/CenterNet/exp/multi_pose/default_hourglass/model_4.pth'
 arch = 'res_18'
 # arch = 'hourglass'
@@ -33,6 +33,6 @@ detector = Detector(opt)
 
 # img_path = '/Users/gillevi/Downloads/yoav_wedding.jpeg'
 #img_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images/3/Frames/frame0067.png'
-img_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_debug_resized/3/Frames/frame0067.png'
+img_path = '/Users/gillevi/Projects/SurgeonAI/data/Hadassah_2021-07-05/raw_images_resized_tiny/4/Frames/frame0117.png'
 ret = detector.run(img_path)['results']
 print(ret)
