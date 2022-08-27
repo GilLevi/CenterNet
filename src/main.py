@@ -85,6 +85,7 @@ def main(opt):
         logger.write('{} {:8f} | '.format(k, v))
         print('val_{}'.format(k), v, epoch)
       print('================================================')
+      logger.write('================================================')
       save_model(os.path.join(opt.save_dir, 'model_{}.pth'.format(epoch)),
                  epoch, model, optimizer)
       if log_dict_val[opt.metric] < best:
@@ -109,6 +110,6 @@ def main(opt):
 #arch=res_18, head_conv=64
 if __name__ == '__main__':
   opt = opts().parse(args=['--task=multi_pose', '--dataset=surgai', '--gpu=-1', '--arch=res_18', '--head_conv=-1',
-                           '--num_workers=0', '--batch_size=1', '--scale=0', '--shift=0', '--flip=0', '--val_intervals=1000'])
+                           '--num_workers=0', '--batch_size=1', '--scale=0', '--shift=0', '--flip=0', '--val_intervals=1'])
 
   main(opt)

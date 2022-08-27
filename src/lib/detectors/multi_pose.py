@@ -99,7 +99,7 @@ class MultiPoseDetector(BaseDetector):
     debugger.add_img(image, img_id='multi_pose')
     for bbox in results[1]:
       # if bbox[4] > self.opt.vis_thresh:
-      if bbox[4] > 0.1:
+      if bbox[4] > 0.05:
           # debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
         # TODO: 4CENTER_NET
         #   debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
